@@ -194,6 +194,9 @@ function InitPxVideo(options) {
 		'</div>' + 
 		'<div>' + 
 			'<progress class="px-video-progress" max="100" value="0"><span>0</span>% played</progress>' + 
+		'</div>' +
+		'<div>' +
+			'<input id="progress'+obj.randomNum+'" class="px-video-progress-slider" type="range" min="0" max="100" value="0" />' +
 		'</div>';
 
 	// Adjust layout per width of video - container
@@ -266,6 +269,8 @@ function InitPxVideo(options) {
 	obj.captionsBtnContainer = obj.container.getElementsByClassName('px-video-captions-btn-container')[0];
 	obj.duration = obj.container.getElementsByClassName('px-video-duration')[0];
 	obj.txtSeconds = obj.container.getElementsByClassName('px-seconds');
+
+	obj.progressSlider = obj.container.getElementsByClassName('px-video-progress-slider')[0];
 
 	// Update number of seconds in rewind and fast forward buttons
 	obj.txtSeconds[0].innerHTML = obj.seekInterval;
@@ -373,7 +378,28 @@ function InitPxVideo(options) {
 		obj.percent = (100 / obj.movie.duration) * obj.movie.currentTime;
 		if (obj.percent > 0) {
 			obj.progressBar.value = obj.percent;
+			obj.progressSlider.value = obj.percent;
 			obj.progressBarSpan.innerHTML = obj.percent;
+		}
+	}, false);
+
+	obj.progressSlider.addEventListener('onmousedown', function() {
+		console.log("progress slider pressed");
+		//pause video
+	}, false);
+
+	obj.progressSlider.addEventListener('onmouseup', function() {
+		console.log("progress slider released");
+		//resume video if it was playing
+	}, false);
+
+	obj.progressSlider.addEventListener('change', function() {
+		// new time
+		var time = obj.movie.duration * (obj.progressSlider.value / 100);
+		console.log(time);
+		if (time != obj.movie.currentTime) {
+			obj.movie.currentTime = time;
+			console.log(obj.movie.currentTime);
 		}
 	}, false);
 

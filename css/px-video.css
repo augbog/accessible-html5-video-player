@@ -216,6 +216,11 @@
 	height: 12px;
 	width: 8px;
 }
+
+input[type='range'].px-video-progress-slider{
+	width: 100%;
+}
+
 /* fixing display for IE10+ */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 	.px-video-controls input[type='range'] {
