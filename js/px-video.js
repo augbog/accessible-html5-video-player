@@ -195,7 +195,7 @@ function InitPxVideo(options) {
 		'<div>' + 
 			'<progress class="px-video-progress" max="100" value="0"><span>0</span>% played</progress>' + 
 		'</div>' +
-		'<div>' +
+		'<div class="px-video-progress-slider-container">' +
 			'<input id="progress'+obj.randomNum+'" class="px-video-progress-slider" type="range" min="0" max="100" value="0" />' +
 		'</div>';
 
